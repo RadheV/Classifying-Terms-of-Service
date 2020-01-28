@@ -52,8 +52,15 @@ The text preprocessing was done by removing english stop words and punctuation a
 - All words were then set to lowercase
 - Customised english stop words were removed
 
+#### WordCloud
 
 ![Image of WordCloud](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/wordcloud.png)
+
+In addition to visualising keywords, Wordcloud also gives a visual mapping of the most repeated words - allowed to identitfy unneccessary html tag words such as < strong >, li etc which was drawn back to data cleaning segment to be removed once again
+
+Though WordCloud are useful in identitying keywords, it fares poorly in obtaining significance as there is a large difference in meaning overlaps of words in various topics even with common stop words removed.
+
+#### WordCloud by Topic
 
 ![Image of WordCloud by topic](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/wordcloud_by_topics.png)
 
