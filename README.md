@@ -53,9 +53,9 @@ The text preprocessing was done by removing english stop words and punctuation a
 - Customised english stop words were removed
 
 
-![][Image of WordCloud](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/wordcloud.png | width=100)
+![Image of WordCloud](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/wordcloud.png =250x250)
 
-![][Image of WordCloud by topic](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/wordcloud_by_topics.png | width=100)
+![Image of WordCloud by topic](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/wordcloud_by_topics.png =250x250)
 
 
 Combination of two NLP classification models were used in the prediction of the topic prediction (out of 24 topics) as well as unfavourable terms (warning terms) 
