@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+	<header>
+		<div class="container">
+		<div id="brandname">
+		<div style="text-align: center;">
+		<h2>Terms of Service Classifier</h2>
+		
+	</div>
+	</header>
+	<div class="results">
+    <div style="text-align: center;">   
+
+            
+	{% if prediction > 0.5%}
+	<h2 style="color:red;">WARNING: YOUR ATTENTION REQUIRED</h2>
+	{% elif prediction < 0.5 %}
+	<h2 style="color:green;">GOOD TO GO</h2>
+	{% endif %}
+
+	</div>
+
+</body>
+</html>
