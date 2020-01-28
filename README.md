@@ -53,9 +53,9 @@ The text preprocessing was done by removing english stop words and punctuation a
 - Customised english stop words were removed
 
 
-![Image of WordCloud](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/wordcloud.png)
+![Image of WordCloud](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/wordcloud.png | width=100))
 
-![Image of WordCloud by topic](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/wordcloud_by_topics.png)
+![Image of WordCloud by topic](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/wordcloud_by_topics.png | width=100))
 
 
 Combination of two NLP classification models were used in the prediction of the topic prediction (out of 24 topics) as well as unfavourable terms (warning terms) 
@@ -152,7 +152,7 @@ The model was able to achieve an accuracy rate of 72.7 % in predicting one out o
 ### Check out the deployed app for Classifying Terms of Service!
 ---
 
-[Classifying Terms of Service Website Page](https://3a1ee6a5.ngrok.io/)
+[Classifying Terms of Service Website Page](http://9f17b6f0.ngrok.io/)
 
 Enter the terms of service or privacy policy URL of desired service to find out whether it is 'GOOD TO GO' or 'WARNING: YOUR ATTENTION REQUIRED'. The threshold is currently set to 0.8 for a stringent analysis of unfavourable terms. This threshold can be amended according to user preference and/or business requirements
 
