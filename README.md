@@ -5,32 +5,59 @@
 Is it possible to predict concerning terms of service and categorizing them into appropriate topics - Using Natural Language Processing ?
 
 ### Data Collection
----The analysis was done on ___ services stated in the ToSdR website and information on service was collected by scraping the [Index's Website Page]((website url))
+---
+The analysis was done on 383 services stated in the Terms of Service; Didn't Read (ToS;DR) website - public database of crowdsourced extracts and reviews. By requesting and reading JSON API files given in its  GitHub open sourced for use, I was able to attain 2565 data points from the stated 383 services varying in respective quantity.  by scraping the [Terms of Service; Didn't Read](https://tosdr.org/#)
 
-Over 2,500 extracts were retrieved from the database.
+### Data Cleaning
 
-Extracts with changes that were:
-- Missing topics
-- Missing Ratings
+Missing data was a prominent issue in the dataset that was rendered. 
+Columns that a high number of missing values were of Topics and Ratings which had to be filled up manually by the most probable value with respective of the existing values and with reference to ToSdr website.
+
+- Columns with irrelevant values were dropped 
+- Columns with large number of null values were dropped
+- Topics were consolidated for consistency 
+- Topics with insignificant counts were reassigned to suitable prominent topics
+- Topics with low data counts (below 10 counts) were dropped
+
+2565 rows × 18 columns was reduced to 2403 rows × 8 columns
 
 ### Feature Engineering
 ---
-Count vectoriser and TFIDF vectoriser used to reveal common words/features in high or low reviews
+Count vectoriser was used to reveal common features in 
 Feature engineering using Natural Language Processing and Sentiment Analysis gave my model more predictive power.
 Regarding the features that were used in the model to help on predicting the movements were:
 
 ### Preprocessing
 ---
-The text preprocessing was done by removing english stop words and punctuation as well as lemmatizing the words and RegExpression
 
-Reassigning topics with insignificant counts to prominent topics
+Count vectoriser was used to reveal top features in terms of service or privacy policy documents 
+
+| top features            | frequency|
+|-------------------------|----------|
+| information             | 1214     |
+| use                     | 1155     |
+| services                | 974      |
+| service                 | 679      |
+| content                 | 622      |
+| data                    | 601      |
+| account                 | 501      |
+| personal                | 472      |
+| terms                   | 458      |
+| time                    | 417      |
+
+
+The text preprocessing was done by removing english stop words and punctuation as well as lemmatizing the words and RegExpression
 
 Both the training and testing sets were cleaned and transformed with the same pipeline order:
 
 *Cleaning:*
 - NLTK RegeTokenizer was used to separate the words 
 - Special characters were then striped away
+- Only alphabets were kept
 - All words were then set to lowercase
+- keep only alphabets
+
+![Image of WordCloud](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/wordcloud.png))
 
 The text were then transformed in a TFiDFVectorizer (tvec) from the sklearn framework. The tvec was tuned using a GridSearch method measuring on accuracy of a logistic regression. English stopwords were used with a 5,000 limit of features. Once transformed, _ classification techniques were tested to find the highest accuracy score. Their training and testing scores are listed in the table below:
 
