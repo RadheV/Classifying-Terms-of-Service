@@ -55,6 +55,8 @@ The text preprocessing was done by removing english stop words and punctuation a
 
 ![Image of WordCloud](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/wordcloud.png)
 
+![Image of WordCloud by topic](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/wordcloud_by_topics.png)
+
 
 Combination of two NLP classification models were used in the prediction of the topic prediction (out of 24 topics) as well as unfavourable terms (warning terms) 
 
@@ -95,7 +97,7 @@ From Good-Neutral-Bad to Bad-Non-Bad
 
 ![Good-Neutral-Bad](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/bad-neutral-good.png)
 
-![Bad-Non-Bad](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/bad-neutral-good.png)
+![Bad-Non-Bad](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/bad-non-bad.png)
 
 The Baseline Accuracy is 51.6% in predicting unfavourable terms.
 
@@ -155,6 +157,13 @@ The model was able to achieve an accuracy rate of 72.7 % in predicting one out o
 Enter the terms of service or privacy policy URL of desired service to find out whether it is 'GOOD TO GO' or 'WARNING: YOUR ATTENTION REQUIRED'. The threshold is currently set to 0.8 for a stringent analysis of unfavourable terms. This threshold can be amended according to user preference and/or business requirements
 
 ngrok is an open-source tool that exposes local port as a public URL through SSL which one can copy from the CLI. It provides secure tunnels to localhost server. This means that localhost web server will receive the request through public URL which is very helpful to share or demo or debug integration environments where it accepts only public URL. 
+
+
+#### Using [Facebook Terms of Service](https://www.facebook.com/legal/terms) as an test example
+
+![Web App Home Page](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/Web%20Application.png)
+![Web App Predict Page](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/Web%20Application%20Predict%20Page.png)
+![Web App Classification Page](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/Classifying%20ToS.png)
 
 
 ### Next Steps
