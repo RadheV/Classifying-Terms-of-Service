@@ -23,12 +23,7 @@ Columns that a high number of missing values were of Topics and Ratings which ha
 
 ### Feature Engineering
 ---
-Count vectoriser was used to reveal common features in 
-Feature engineering using Natural Language Processing and Sentiment Analysis gave my model more predictive power.
-Regarding the features that were used in the model to help on predicting the movements were:
-
-### Preprocessing
----
+Count vectoriser was used to reveal common features in Feature engineering using Natural Language Processing.
 
 Count vectoriser was used to reveal top features in terms of service or privacy policy documents 
 
@@ -45,6 +40,8 @@ Count vectoriser was used to reveal top features in terms of service or privacy 
 | terms                   | 458       |
 | time                    | 417       |
 
+### Preprocessing
+---
 
 The text preprocessing was done by removing english stop words and punctuation as well as lemmatizing the words and RegExpression
 
@@ -61,68 +58,104 @@ The text preprocessing was done by removing english stop words and punctuation a
 
 Combination of two NLP classification models were used in the prediction of the topic prediction (out of 24 topics) as well as unfavourable terms (warning terms) 
 
+Two bag of word models: CountVectorizer and TfidfVectorizer. Best accuracy - precision results (though very small difference) were obtained using TfidfVectorizer as compared to  CountVectorizer to vectorize the text data and variables 
+
+|             | CVect/LogRe | TVect/LogRe  |
+|-------------|-------------|--------------|
+| accuracy    | 0.699       | 0.704        |
+| precision   | 0.701       | 0.707        |
+| recall      | 0.699       | 0.704        |
+| f1 score    | 0.691       | 0.679        |
+
+
+
+### Modeling
+---
+
 #### Topic prediction 
 
 ![Topic Distribution](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/topics.png)
 
 
-The lemmatized document text were then transformed in a TFiDFVectorizer (tvec) from the sklearn framework. The tvec was tuned using a GridSearch method measuring on accuracy of a logistic regression. English stopwords were used with a 5,000 limit of features. Once transformed, logistic regression classifier were tested to find the training and testing score.
+The lemmatized document text were then transformed in a TFiDFVectorizer (tvec) from the sklearn framework. The tvec was tuned using a GridSearch method measuring on accuracy of the classifier. The classifier chosen to do the analysis and prediction of topics was a Logistic Regression for its interpretability.  English stopwords were used with a 5,000 limit of features. Once transformed, logistic regression classifier were tested to find the training and testing score.
+
+The Baseline Accuracy is 12.6% in predicting one out of twenty-four subject topics.
 
 Training score is 0.981 which indicates that overfitting. This is common in NLP as the model is fitting random idiosyncrasies in the training data rather than model the true underlying trends. Thus, looking at the test score will be of better significance.
 
 Test score is 0.727 which is a good score conveying that the model is perfoming well enough.
-This score implies that out of 100 instances, the model correctly predicts the topic 72.7 times.
+This score implies that out of 100 instances, the model correctly predicts the topic 72.7 % of the time.
 
 
-#### Unfavorable Terms prediction 
+#### Unfavorable Terms prediction  
 
-Sklearn is used to fit different models.  Multinomial Naive Bayes classifier and Counter Vectorizer for preprocessing were chosen for the end model.
-The reason for choosing Counter Vecctorizer is that the model should be interpretable. With Counter Vectorizer, the number of times a word occurs in a document is counted and used for prediction. It is easy to look at the word frequency of the test data.
+First Feature Engineering had to be done on the Point (Rating Classification) column
 
-|                         | CVect/MNB |
-|-------------------------|-----------|
-| Train Score Accuracy    | 0.8973    |
-| Test Score Accuracy     | 0.8906    |
-| Test Score ROC_AUC      | 0.8979    |
-| Test Sensitivity Score  | 0.9369    |
-| Train Specificity Score | 0.8588    |
+From Good-Neutral-Bad to Bad-Non-Bad
 
-### Modeling
----
-The classifier chosen to do the analysis and prediction of topics was a Logistic Regression for its interpretability. 
-The classifier chosen to do the analysis and categorization of concerning (or warning) terms of service extract was a RandomForest Classifier for its high precision.
-TF-IDF (Term Frequency - Inverse Document Frequency) was used to vectorize the text data and variables 
+![Good-Neutral-Bad](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/bad-neutral-good.png)
 
-*Insert comparing models and results here*
+![Bad-Non-Bad](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/bad-neutral-good.png)
 
-Applying classification models (Logistic Regression, Random Forest, Naive Bayes etc) to predict star ratings on cameras. Both as a multi class and binary class problem. 
+The Baseline Accuracy is 51.6% in predicting unfavourable terms.
+
+TFiDFVectorizer (tvec) was chosen for preprocessing.
+As for deciding on the model, Sklearn is used to fit different models and the precision results were compared to find out the best classifier model from the sklearn framework. The tvec was then tuned using a GridSearch method measuring on accuracy of the chosen model. 
+
+Precision will be a good measure to determine when the costs of False Positive is high. For this case, a false positive means that a term of service that is subjected to be of warning is being identified as non-warning. The service may overlook this term of service ans agress the accept them without knowing any wiser.
+
+![Classifier](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/classifiers.png)
+
+Comparing the models, RandomForest seems to have the highest precision of 0.840. Thus we will be going ahead with it
+
+|             | TVec/RandomForest |
+|-------------|-------------------|
+| accuracy    | 0.840             | 
+| precision   | 0.840             |
+| recall      | 0.840             | 
+| f1 score    | 0.840             | 
+
+
+Confusion Matrix was computed to give a summary of prediction results on this classification problem. 
+
+![Confusion Matrix](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/confusion_matrix.png)
+
+The prediction model accurately predicts:
+- 84% for warning terms 
+- 85% for non- warning terms
+
+#### ROC Curve  
+
+ROC Curve shows the tradeoff between sensitivity and specificity of our model which in this case loosely means that how good the model can distinguish.
+
+![ROC Curve](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/(ROC)%20Curve.png)
+
+The AUC (the area under the ROC curve) seems to be large enough therefore this show that our model is doing a good job of distinguishing the positive and the negative values.
+
+Since our model is performing well enough, we are well convinced to move forth with it.
+
+#### Important words for warning and non-warning terms
+
+![Important Words](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/important%20words.png)
+
 
 ### Conclusion
 ---
 The Precision results for model with only the text documents and including all previously mentioned features
 can be seen in the following image:
 
-On the other hand, % accuracy score on the testing data (given url) is a % improvement on a baseline random choice model.
+The model was able to achieve an accuracy rate of 72.7 % in predicting one out of twenty-four subject topics, against a baseline of 11% and an an accuracy rate of 84% in predicting unfavourable (warning) terms, against a baseline of 51.6%
 
-Regarding Feature importance, for documents classified as a warning or non-warning the most common words
-can be seen in the image below.
 
-![Important Features - Up](./images/up.png)
-![Important Features - Down](./images/down.png)
-
-Given those results it is worth creating models for specific services as documents seem to be generic. By creating models
-per service type might improve in at least a couple percentage points for certain services.
-
-As some final thoughts I would say that it is possible, if provided with
-the right tools, models like this one could be be used to make quick decision making before accepting terms of condition.
-
-#### Check out the deployed app for Classifying Terms of Service!
+### Check out the deployed app for Classifying Terms of Service!
+---
 
 [Classifying Terms of Service Website Page](https://3a1ee6a5.ngrok.io/)
 
-Enter the terms of service or privacy policy URL of desired service to find out whether it is 'GOOD TO GO' or 'WARNING: YOUR ATTENTION REQUIRED'. The threshold is currently set to 0.8 for a stringent analysis of warning terms. This threshold can be amended according to user preference and/or business requirements
+Enter the terms of service or privacy policy URL of desired service to find out whether it is 'GOOD TO GO' or 'WARNING: YOUR ATTENTION REQUIRED'. The threshold is currently set to 0.8 for a stringent analysis of unfavourable terms. This threshold can be amended according to user preference and/or business requirements
 
 ngrok is an open-source tool that exposes local port as a public URL through SSL which one can copy from the CLI. It provides secure tunnels to localhost server. This means that localhost web server will receive the request through public URL which is very helpful to share or demo or debug integration environments where it accepts only public URL. 
+
 
 ### Next Steps
 ---
