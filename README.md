@@ -32,39 +32,49 @@ Regarding the features that were used in the model to help on predicting the mov
 
 Count vectoriser was used to reveal top features in terms of service or privacy policy documents 
 
-| top features            | frequency|
-|-------------------------|----------|
-| information             | 1214     |
-| use                     | 1155     |
-| services                | 974      |
-| service                 | 679      |
-| content                 | 622      |
-| data                    | 601      |
-| account                 | 501      |
-| personal                | 472      |
-| terms                   | 458      |
-| time                    | 417      |
+| top features            | frequency |
+|-------------------------|-----------|
+| information             | 1214      |
+| use                     | 1155      |
+| services                | 974       |
+| service                 | 679       |
+| content                 | 622       |
+| data                    | 601       |
+| account                 | 501       |
+| personal                | 472       |
+| terms                   | 458       |
+| time                    | 417       |
 
 
 The text preprocessing was done by removing english stop words and punctuation as well as lemmatizing the words and RegExpression
-
-Both the training and testing sets were cleaned and transformed with the same pipeline order:
 
 *Cleaning:*
 - NLTK RegeTokenizer was used to separate the words 
 - Special characters were then striped away
 - Only alphabets were kept
 - All words were then set to lowercase
-- keep only alphabets
+- Customised english stop words were removed
 
-![Image of WordCloud](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/wordcloud.png))
 
-The text were then transformed in a TFiDFVectorizer (tvec) from the sklearn framework. The tvec was tuned using a GridSearch method measuring on accuracy of a logistic regression. English stopwords were used with a 5,000 limit of features. Once transformed, _ classification techniques were tested to find the highest accuracy score. Their training and testing scores are listed in the table below:
+![Image of WordCloud](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/wordcloud.png)
 
-![Imgur](https://i.imgur.com/BQtukgM.png)
 
-The Random Forest was identified as the best performing for highest  score on testing and smallest difference between the training and testing score. Predictions made from the Random Forest were then sent to 
+Combination of two NLP classification models were used in the prediction of the topic prediction (out of 24 topics) as well as unfavourable terms (warning terms) 
 
+#### Topic prediction 
+
+![Topic Distribution](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/topics.png)
+
+
+The lemmatized document text were then transformed in a TFiDFVectorizer (tvec) from the sklearn framework. The tvec was tuned using a GridSearch method measuring on accuracy of a logistic regression. English stopwords were used with a 5,000 limit of features. Once transformed, logistic regression classifier were tested to find the training and testing score.
+
+Training score is 0.981 which indicates that overfitting. This is common in NLP as the model is fitting random idiosyncrasies in the training data rather than model the true underlying trends. Thus, looking at the test score will be of better significance.
+
+Test score is 0.727 which is a good score conveying that the model is perfoming well enough.
+This score implies that out of 100 instances, the model correctly predicts the topic 72.7 times.
+
+
+#### Unfavorable Terms prediction 
 
 Sklearn is used to fit different models.  Multinomial Naive Bayes classifier and Counter Vectorizer for preprocessing were chosen for the end model.
 The reason for choosing Counter Vecctorizer is that the model should be interpretable. With Counter Vectorizer, the number of times a word occurs in a document is counted and used for prediction. It is easy to look at the word frequency of the test data.
