@@ -147,6 +147,10 @@ Since our model is performing well enough, we are well convinced to move forth w
 
 ![Important Words](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/important%20words.png)
 
+#### Limitations
+
+- Wrongly predicted topics and unfavourable terms classification
+- Requires a certain format of a clear segmentation to be presented for better prediction and classification 
 
 ### Conclusion
 ---
