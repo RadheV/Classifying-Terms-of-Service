@@ -30,17 +30,29 @@ def home():
 
 @app.route('/predict',methods=['POST'])
 def predict():
+    
+    
     df = pd.read_csv('../webapp/revised_rating_data')
     lemmatized = df['lemmatized'].tolist()
+    X_class = df['lemmatized']
+    y_class = df['point_non-bad']
+    X_train_class, X_test_class, y_train_class, y_test_class = train_test_split(X_class, y_class, test_size=0.25, random_state=42)
+    tvec_class = TfidfVectorizer(stop_words='english')
+    tvec_class.fit(X_train_class.values.astype('U'))
+    X_train_class = tvec_class.transform(X_train_class.values.astype('U'))
+    lr_class = LogisticRegression()
+    lr_class.fit(X_train_class, y_train_class)
+    
+    data = pd.read_csv('../webapp/revised_data')   
     X = df['lemmatized']
-    y = df['point_non-bad']
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+    y = data['topics']
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state=42)
     tvec = TfidfVectorizer(stop_words='english')
     tvec.fit(X_train.values.astype('U'))
     X_train = tvec.transform(X_train.values.astype('U'))
     lr = LogisticRegression()
     lr.fit(X_train, y_train)
-    
+      
     if request.method == 'POST':
         message = request.form['message']
         data = message
@@ -72,11 +84,37 @@ def predict():
         for text in term_frame['quoteText']:
             lemm_text.append(text_to_words(text))
             
+           
+        vect_class = tvec_class.transform(lemm_text).toarray()
+        prediction_class = pd.DataFrame(lr_class.predict_proba(vect_class), columns=['warning','non-warning'])
+        
         vect = tvec.transform(lemm_text).toarray()
-        prediction = pd.DataFrame(lr.predict_proba(vect), columns=['warning','non-warning'])
+        prediction = pd.DataFrame(lr.predict(vect), columns =['pred_topic'])
+        
         results = pd.merge(term_frame, prediction, left_index=True, right_index=True)
+        results = pd.merge(results, prediction_class, left_index=True, right_index=True)
+        results = results.sort_values('non-warning')
         my_prediction = results["warning"].mean()
-        return render_template('result.html', prediction = my_prediction)
+        #results = results[results['warning'] > 0.3 ]
+        topics = []
+        topicIndx = []
+        topicContent=[]
+        for i in results['pred_topic']:
+            if i not in topics:
+                topics.append(i)
+        for i in topics:
+            topic = results[results['pred_topic'] == i]
+            count = 0
+            for j in topic.index:
+                count +=1   
+                topicContent.append(topic.quoteText[j])
+                topicIndx.append(i)
+        df1 = pd.DataFrame({'topic':topicIndx,
+                       'content':topicContent})
+        df1 = df1.replace('\n','', regex=True)
+        df1 = df1.replace('<i>','', regex=True)
+        df1 = df1.replace('&#13;','', regex=True)
+        return render_template('result-Copy1.html', prediction = my_prediction, df1 = df1.to_html())
 
 if __name__ == '__main__':
     app.run(debug=True)
