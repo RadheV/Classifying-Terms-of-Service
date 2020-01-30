@@ -2,7 +2,18 @@
 
 ### Problem Statement
 ---
-Is it possible to predict concerning terms of service and categorizing them into appropriate topics - Using Natural Language Processing ?
+When was the last time you read the terms & conditions before you accepted one?
+
+According to a US Deloitte survey of 2,000 consumers, 91% of people consent to legal terms and services conditions without reading them and this situation is even worrying as the proportion is 97% if you fall between ages 18-34. 
+
+The language is too complex and long-winded for most service users to go through thoroughly and more often, they are willing to consumers are willingly to accept terms with the assumption most companies (at its worst) will do is sell their personal data such as name, location, age group etc. to a third party that wants to advertise to them. 
+
+Terms of Service and Pivate Policies exist to protect the company and its users from legal trouble. But a handful of hidden clauses exist to take advantage of users.
+
+### Proposed Solution
+---
+
+To build a tool to scan a Terms of Service or Privacy Policy page to identify unfavourable terms and classify them into categories. The idea is to potentially made these terms of services easier to understand or otherwise improve awareness.
 
 ### Data Collection
 ---
@@ -179,12 +190,16 @@ ngrok is an open-source tool that exposes local port as a public URL through SSL
 
 ### Next Steps
 ---
-This analysis only touches the surface and it could further be improved on advanced techniques for
+This analysis could further be improved on advanced techniques for
 Natural Language Processing. Therefore some of the future steps for this work might be to:
 
 - Develop a convolutional and recurrent neural network model with a specialized word embedding layer
-- Use Sense2Vec to understand sentences and extract more information from the text
-- Deciding on a threshold (warning or non-warning) for each specfic service so that the analysis could be more precise
+- Use Word Sense Disambiguation methods to understand sentences and extract more information from the text
+- Deciding on an appropriate threshold (warning or non-warning) for each specfic service so that the analysis could be more precise
+
+Other sources of information could also be explored:
+- Case Studies on terms of service previous legal and ethical conflict - highlight documents that might of crucial
+- Sentiment analysis
 
 Other sources of information could also be explored:
 - Case Studies on terms of service previous legal and ethical conflict - highlight documents that might of crucial
