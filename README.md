@@ -183,9 +183,9 @@ ngrok is an open-source tool that exposes local port as a public URL through SSL
 
 #### Using [Facebook Terms of Service](https://www.facebook.com/legal/terms) as an test example
 
-![Web App Home Page](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/Web%20Application.png)
-![Web App Predict Page](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/Web%20Application%20Predict%20Page.png)
-![Web App Classification Page](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/Classifying%20ToS.png)
+![Web App Home Page](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/WebApp.png)
+![Web App Predict Page](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/WebApp_2.png)
+![Web App Classification Page](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/WebApp_3.png)
 
 
 ### Next Steps
