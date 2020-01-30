@@ -181,7 +181,7 @@ Enter the terms of service or privacy policy URL of desired service to find out 
 ngrok is an open-source tool that exposes local port as a public URL through SSL which one can copy from the CLI. It provides secure tunnels to localhost server. This means that localhost web server will receive the request through public URL which is very helpful to share or demo or debug integration environments where it accepts only public URL. 
 
 
-#### Using [Facebook Terms of Service](https://www.facebook.com/legal/terms) as an test example
+#### Using [Google Terms of Service](https://policies.google.com/terms?hl=en-US) as an test example
 
 ![Web App Home Page](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/WebApp.png)
 ![Web App Predict Page](https://github.com/RadheV/ClassifyingTermsofService/blob/master/images/WebApp_2.png)
